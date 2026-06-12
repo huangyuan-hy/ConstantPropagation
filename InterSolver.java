@@ -76,22 +76,7 @@ class InterSolver<Method, Node, Fact> {
     }
 
     private void doSolve() {
-        workList = new SetQueue<>();
-        icfg.forEach(workList::add);
-        while (!workList.isEmpty()) {
-            Node node = workList.poll();
-            // meet incoming facts
-            Fact in = result.getInFact(node);
-            icfg.getInEdgesOf(node).forEach(inEdge -> {
-                Fact predOut = result.getOutFact(inEdge.getSource());
-                analysis.meetInto(analysis.transferEdge(inEdge, predOut), in);
-            });
-            Fact out = result.getOutFact(node);
-            boolean changed = analysis.transferNode(node, in, out);
-            if (changed) {
-                propagate(node);
-            }
-        }
+        // TODO
     }
 
     void propagate(Node node) {
